@@ -36,6 +36,12 @@ export function handleRequests(request: IncomingMessage, response: ServerRespons
       }
       break;
     }
+    case "/" : {
+      if (request.method === 'GET') {
+          response.end('<a href="/api/v1/sysinfo">CLIQUEZ ICI');
+        }
+      }
+      break;
     default: {
       response.statusCode = 404;
       response.end();
