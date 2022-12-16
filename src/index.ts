@@ -1,7 +1,7 @@
 import { createServer, IncomingMessage, Server, ServerResponse } from 'http';
 import si from 'systeminformation';
 
-
+//
 interface ISystemInformation {
   cpu: si.Systeminformation.CpuData;
   system: si.Systeminformation.SystemData;
