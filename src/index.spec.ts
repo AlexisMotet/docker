@@ -1,24 +1,18 @@
-import {startServer} from './index';
+import {startServer, stopServer} from './index';
 
-test('handleRequest good path', async () => {
+test('basic test', async () => {
   const server = startServer(1818);
-  const response = await fetch('http://localhost:1818/testgoodpath', {method: 'GET'});
+  const response = await fetch('http://localhost:1818/api/v1/sysinfo', {method: 'GET'});
   const data = await response.json();
-  expect(data).toHaveProperty('cpu');
-  expect(data).toHaveProperty('system');
-  expect(data).toHaveProperty('mem');
-  expect(data).toHaveProperty('os');
-  expect(data).toHaveProperty('currentLoad');
-  expect(data).toHaveProperty('processes');
-  expect(data).toHaveProperty('diskLayout');
-  expect(data).toHaveProperty('networkInterfaces');
-  server.close();
+  expect(await data).toHaveProperty('cpu');
+  expect(await data).toHaveProperty('system');
+  expect(await data).toHaveProperty('mem');
+  expect(await data).toHaveProperty('os');
+  expect(await data).toHaveProperty('currentLoad');
+  expect(await data).toHaveProperty('processes');
+  expect(await data).toHaveProperty('diskLayout');
+  expect(await data).toHaveProperty('networkInterfaces');
+  stopServer(server);
 });
 
-test('handleRequest bad path', async () => {
-  const server = startServer(1818);
-  const response = await fetch('http://localhost:1818/testbadpathFAIL', {method: 'GET'});
-  expect(response.status).toBe(404);
-  server.close();
-});
 

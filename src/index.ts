@@ -1,4 +1,4 @@
-import { createServer, IncomingMessage, ServerResponse } from 'http';
+import { createServer, IncomingMessage, Server, ServerResponse } from 'http';
 import si from 'systeminformation';
 
 
@@ -49,6 +49,10 @@ export function startServer(port: number) {
   const server = createServer((request: IncomingMessage, response: ServerResponse) => 
     {handleRequests(request, response)});
   return server.listen(port);
+}
+
+export function stopServer(server : Server) {
+  server.close();
 }
 
 startServer(5000);
